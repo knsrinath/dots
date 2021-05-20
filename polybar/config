@@ -1,0 +1,355 @@
+[colors]
+background           = #282a36
+foreground           = #ff79c6
+
+[bar/bspwm]
+width = 100%
+height = 25
+offset-x = 0%
+offset-y = 0%
+radius = 0.0
+fixed-center = true
+bottom = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = ${colors.background}
+
+border-size = 0
+border-color = ${colors.border}
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Jetbrains Mono:size=9;2
+font-1 = Jetbrains Mono Nerd font:size=10;2
+
+modules-left    = launch xwindow
+modules-center  = workspaces
+modules-right   = pulseaudio sps wlan sps sps battery sps sps date
+
+;tray-position = right
+;tray-padding = 0
+
+wm-restack = bspwm
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[module/xwindow]
+type = internal/xwindow
+label = "%title:0:45:...%"
+label-empty = BSPWM
+format-prefix = 
+format-suffix = 
+format-foreground = ${colors.foreground}
+format-padding = 2
+
+[module/filesystem]
+type = internal/fs
+interval = 1
+
+mount-0 = /
+
+format-mounted = <label-mounted>
+format-mounted-prefix = " "
+format-mounted-foreground = ${colors.foreground}
+label-mounted =  "%percentage_used%%"
+
+format-unmounted = <label-unmounted>
+format-unmounted-prefix = "HDD "
+label-unmounted = %mountpoint%: not mounted
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "﬙ "
+format-prefix-foreground = ${colors.foreground}
+label = "%percentage:2%%"
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp8s0
+interval = 1
+accumulate-stats = true
+unknown-as-up = true
+format-connected                      = "直 <label-connected>"
+format-connected-foreground           = ${colors.foreground}
+format-connected-prefix               = ""
+
+format-disconnected                   = "睊 <label-disconnected>"
+format-disconnected-foreground        = ${colors.foreground}
+format-disconnected-prefix            = ""
+
+label-connected = "%signal%%"
+label-disconnected = "%signal%%"
+
+[module/eth]
+type = internal/network
+interface = enp2s0
+interval = 1
+
+format-connected = ""
+format-connected-foreground = ${colors.foreground}
+format-connected-prefix = ""
+label-connected = "%ifname%"
+
+format-disconnected =
+format-disconnected-foreground = ${colors.foreground}
+label-disconnected = "Not connected"
+
+[module/date]
+type = internal/date
+interval = 1
+
+time = "%a %b %d %I:%M %p"
+
+format-prefix =    
+label = "%time%"
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+battery = BAT0
+adapter = ADP1
+
+poll-interval = 2
+time-format = %H:%M
+
+format-charging = "<animation-charging> <label-charging>%"
+format-discharging = "<ramp-capacity> <label-discharging>%"
+format-full = " <label-full>%"
+
+label-charging = %percentage%
+label-discharging = %percentage%
+label-full = %percentage%
+
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+ramp-capacity-4 = ""
+ramp-capacity-5 = ""
+ramp-capacity-6 = ""
+ramp-capacity-7 = ""
+ramp-capacity-8 = ""
+ramp-capacity-9 = ""
+ramp-capacity-10 = ""
+
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-4 = ""
+animation-charging-5 = ""
+animation-charging-6 = ""
+animation-charging-7 = ""
+animation-charging-8 = ""
+animation-charging-9 = ""
+animation-charging-10 = ""
+animation-charging-framerate = 750
+
+animation-discharging-0 = ""
+animation-discharging-1 = ""
+animation-discharging-2 = ""
+animation-discharging-3 = ""
+animation-discharging-4 = ""
+animation-discharging-5 = ""
+animation-discharging-6 = ""
+animation-discharging-7 = ""
+animation-discharging-8 = ""
+animation-discharging-9 = ""
+animation-discharging-10 = ""
+animation-discharging-framerate = 500
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+use-ui-max = false
+
+interval = 5
+
+format-volume = "<ramp-volume> <label-volume>"
+format-volume-prefix = ""
+format-volume-padding = 1
+
+format-muted = "婢 <label-muted>"
+format-muted-prefix = ""
+format-muted-padding = 1
+
+label-volume = "%percentage%%"
+
+label-muted = "%percentage%%"
+click-right = pavucontrol
+
+ramp-volume-0 = "奄"
+ramp-volume-1 = "奔"
+ramp-volume-2 = "墳"
+
+[module/workspaces]
+type = internal/xworkspaces
+
+pin-workspaces = true
+
+enable-click = true
+
+enable-scroll = false
+
+icon-default = ""
+
+format = <label-state>
+format-padding = 1
+
+label-monitor = %name%
+
+label-active = ""
+
+label-occupied = ""
+
+label-urgent = ""
+label-empty = ""
+
+label-active-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+label-empty-padding = 1
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = acpi_video0
+
+; Enable changing the backlight with the scroll wheel
+; NOTE: This may require additional configuration on some systems. Polybar will
+; write to `/sys/class/backlight/${self.card}/brightness` which requires polybar
+; to have write access to that file.
+; DO NOT RUN POLYBAR AS ROOT. 
+; The recommended way is to add the user to the
+; `video` group and give that group write-privileges for the `brightness` file.
+; See the ArchWiki for more information:
+; https://wiki.archlinux.org/index.php/Backlight#ACPI
+; Default: false
+enable-scroll = false
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = "<ramp> <label>"
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+ramp-6 = ""
+ramp-5 = ""
+ramp-4 = ""
+ramp-3 = ""
+ramp-2 = ""
+ramp-1 = ""
+ramp-0 = ""
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = "SONG "
+format = <label>
+exec = python /home/srinath/.scripts/spotify.py -f '{song}'
+format-underline = #1db954
+click-left = dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+[module/sps]
+type = custom/text
+content = " "
+content-padding = 0
+
+[module/sep]
+type = custom/text
+content = "|"
+content-padding = 0
+
+[module/files]
+type = custom/text
+content = ""
+content-padding = 0
+click-left = thunar
+
+[module/browser]
+type = custom/text
+content = "爵"
+content-padding = 0
+click-left = firefox
+
+[module/launch]
+type = custom/text
+content = "    "
+content-padding = 0
+click-left = /home/srinath/.config/rofi/launchers/misc/launcher.sh
+
+[module/mod]
+type = internal/bspwm
+format = <label-mode>
+format-padding = 1
+label-monocle = ""
+label-tiled = ""
+label-tiledfloat = ""
+label-floating = ""
+label-fullscreen = "Full"
+
+[module/mpd]
+type = internal/mpd
+interval = 1
+
+format-online = "<icon-prev> <toggle> <icon-next> <label-song>"
+format-online-prefix = ""
+
+format-playing = ${self.format-online}
+format-paused = "<icon-prev> <toggle> <icon-next> <label-song>"
+
+label-song = " %title%"
+label-song-maxlen = 45
+label-song-ellipsis = false
+
+icon-play = 
+icon-pause = 
+icon-prev = 玲
+icon-next = 怜
+icon-random = 
+icon-repeat = 
+
+bar-progress-width = 10
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
