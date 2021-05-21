@@ -1,6 +1,6 @@
 # IMPORTS
 import:
-  - /home/srinath/.config/alacritty/dracula.yml
+  - /home/srinath/.config/alacritty/nord.yml
 
 # WINDOW
 window:
